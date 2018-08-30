@@ -1,14 +1,8 @@
 import React,{ Component } from 'react';
 import 'antd/dist/antd.css';
-import { Input, Button, List } from 'antd';
 import TodolistUI from './todolistUI';
 import { store }  from './store/';
-import { getInputChange, getTodoItem, deleteItem} from './store/actionCreators';
-
-
-
-
-
+import { getInputChange, getTodoItem, deleteItem, createListItem} from './store/actionCreators';
 
 
 class Todolist extends Component {
@@ -32,11 +26,16 @@ class Todolist extends Component {
                 handleBtnClick={this.handleBtnClick}
                 list={this.state.list}
                 handleItemClick={this.handleItemClick}
-
             />
         )
 
     }
+
+    componentDidMount(){
+        const action =createListItem();
+        store.dispatch(action);
+    }
+
     handleInputChange(e){
         const action=getInputChange(e.target.value);
         store.dispatch(action);
